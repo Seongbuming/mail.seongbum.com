@@ -30,6 +30,7 @@ services:
     volumes:
       - ./mail:/var/mail
       - ./log:/var/log
+      - ./config:/tmp/docker-mailserver
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
       - /etc/ssl:/etc/ssl:ro
