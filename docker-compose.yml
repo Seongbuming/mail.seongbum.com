@@ -1,0 +1,36 @@
+version: '3'
+
+networks:
+  seongbum_com:
+    external: true
+
+services:
+  mail:
+    image: tvial/docker-mailserver:latest
+    container_name: mail
+    hostname: seongbum.com
+    domainname: seongbum.com
+    restart: always
+    ports:
+     - 25:25 # SMTP send
+     - 465:465 # ESMTP enforced encryption submission
+     - 993:993 # IMAP enforced encryption retrieval
+    environment:
+      - TZ=Asia/Seoul
+      - SSL_TYPE=manual
+      - SSL_CERT_PATH=/etc/ssl/fullchain.pem
+      - SSL_KEY_PATH=/etc/ssl/privkey.pem
+      - SPAMASSASSIN_SPAM_TO_INBOX=1
+      - ENABLE_POSTGREY=1
+      - ONE_DIR=1
+      - DMS_DEBUG=0
+    cap_add:
+      - NET_ADMIN
+      - SYS_PTRACE
+    volumes:
+      - ./mail:/mail
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/ssl:/etc/ssl:ro
+    networks:
+      - seongbum_com
