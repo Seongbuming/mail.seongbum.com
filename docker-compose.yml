@@ -4,12 +4,16 @@ networks:
   seongbum_com:
     external: true
 
+volumes:
+  ssl:
+    external: true
+
 services:
   mail:
     image: docker.io/mailserver/docker-mailserver:latest
     container_name: mail
-    hostname: seongbum.com
-    domainname: seongbum.com
+    hostname: mail.seongbum.com
+    domainname: mail.seongbum.com
     restart: always
     stop_grace_period: 1m
     env_file: ./env/mail.env
@@ -27,7 +31,7 @@ services:
       - ./docker-data/dms/config/:/tmp/docker-mailserver/
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - /etc/ssl:/etc/ssl:ro
+      - ssl:/tmp/ssl:ro
     healthcheck:
       test: "ss --listening --tcp | grep -P 'LISTEN.+:smtp' || exit 1"
       timeout: 3s
