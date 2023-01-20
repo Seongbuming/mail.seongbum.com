@@ -17,15 +17,6 @@ services:
      - 25:25 # SMTP send
      - 465:465 # ESMTP enforced encryption submission
      - 993:993 # IMAP enforced encryption retrieval
-    environment:
-      - TZ=Asia/Seoul
-      - SSL_TYPE=manual
-      - SSL_CERT_PATH=/etc/ssl/fullchain.pem
-      - SSL_KEY_PATH=/etc/ssl/privkey.pem
-      - SPAMASSASSIN_SPAM_TO_INBOX=1
-      - ENABLE_POSTGREY=1
-      - ONE_DIR=1
-      - DMS_DEBUG=0
     cap_add:
       - NET_ADMIN
       - SYS_PTRACE
