@@ -28,7 +28,8 @@ services:
       - NET_ADMIN
       - SYS_PTRACE
     volumes:
-      - ./mail:/mail
+      - ./mail:/var/mail
+      - ./log:/var/log
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
       - /etc/ssl:/etc/ssl:ro
